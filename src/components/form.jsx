@@ -1,9 +1,7 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 
 const BookForm = () => {
-
-    
-        /*
+  /*
         const data = {
             "titulo": "test",
             "editorial": "hgwaiuehw",
@@ -20,30 +18,35 @@ const BookForm = () => {
             .then((response) => response.json())
             .then((json) => setTypes(json.results))
         */
-    
 
-    const [title,setTitle] = useState()
-    const [editorial,setEditorial] = useState()
+  const [title, setTitle] = useState();
+  const [editorial, setEditorial] = useState();
 
-    return (
-        <form
-            style = {{
-                marginTop: "50px"
-            }
-        }
+  return (
+    <form
+      style={{
+        marginTop: "50px",
+      }}
 
-        /*onSubmit={}*/
-        >
-            <label>title</label>
-            <input type="text" name="title" onChange={(event) => setTitle(event.target.value)} />
+      /*onSubmit={}*/
+    >
+      <label>title</label>
+      <input
+        type="text"
+        name="title"
+        onChange={(event) => setTitle(event.target.value)}
+      />
 
-            <label>editorial</label>
-            <input type="text" name="editorial" onChange={(event) => setEditorial(event.target.value)} />
+      <label>editorial</label>
+      <input
+        type="text"
+        name="editorial"
+        onChange={(event) => setEditorial(event.target.value)}
+      />
 
-            <button type="submit">Enviar</button>
-
-        </form>
-    )
-}
+      <button type="submit">Enviar</button>
+    </form>
+  );
+};
 
 export default BookForm;
