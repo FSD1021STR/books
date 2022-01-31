@@ -22,7 +22,6 @@ const BookForm = () => {
   const [title, setTitle] = useState();
   const [editorial, setEditorial] = useState();
 
-<<<<<<< HEAD
   return (
     <form
       style={{
@@ -36,12 +35,14 @@ const BookForm = () => {
         type="text"
         name="title"
         onChange={(event) => setTitle(event.target.value)}
-      />
-=======
+    />
+
     function handleSubmit(event) {
-        event.preventDefault();
-        console.log("submit");
+        event.preventDefault() { 
+            console.log("submit")
         // TODO: validar campos
+        }
+        
         
         const data = {
             "titulo": "test",
@@ -55,13 +56,14 @@ const BookForm = () => {
             body: JSON.stringify(data)
         }
 
-        fetch("http://localhost:8000", requestOptions)
+        fetch("http://localhost:8000", requestOptions) {
             .then((response) => response.json())
             .then((json) => console.log(json.results))
             .catch((error) => {
                 console.error('Error: ', error)
             })
-    }
+        }    
+    
 
     return (
         <form
@@ -76,7 +78,7 @@ const BookForm = () => {
         >
             <label>title</label>
             <input type="text" name="title" onChange={(event) => setTitle(event.target.value)} />
->>>>>>> 8977485b84e047370a24bac7d39832bfb7141a40
+
 
       <label>editorial</label>
       <input
