@@ -1,4 +1,4 @@
-import React, {useState,useContext} from "react";
+import React, {useState,useContext,createContext} from "react";
 
 const BookForm = () => {
 
@@ -16,13 +16,15 @@ const BookForm = () => {
             'api': 'https://test.myapp.com',
             'limit': 10,
             'theme': 'pink',
-            'debug': true
+            'debug': true,
+            'payments': false
         },
         'prod': {
             'api': 'https://www.myapp.com',
             'limit': 10,
             'theme': 'light',
-            'debug': false
+            'debug': false,
+            'payments': true
         }
     }
 
@@ -42,14 +44,14 @@ const BookForm = () => {
     console.log("hola");
 
     if (process.env.REACT_APP_ENVIRONMENT === 'prod'){
-        EnvironmentContext = React.createContext(environments.prod)
+        EnvironmentContext = createContext(environments.prod)
     }
         
     else if (process.env.REACT_APP_ENVIRONMENT === 'sandbox') {
-        EnvironmentContext = React.createContext(environments.sandbox)
+        EnvironmentContext = createContext(environments.sandbox)
     }
     else {
-        EnvironmentContext = React.createContext(environments.sandbox)
+        EnvironmentContext = createContext(environments.dev)
     }
 
     const environment = useContext(EnvironmentContext)
@@ -62,8 +64,11 @@ const BookForm = () => {
     console.info (environment.debug)
     console.log ('%%%%%%%%')
 
-    const ThemeContext = React.createContext(themes.light)
-    const theme = useContext(ThemeContext)
+    //const ThemeContext = createContext(themes.dark)
+    //const theme = useContext(ThemeContext)
+
+    const theme = themes.light
+
     console.log('text: '+theme.text)
     console.log('background: '+theme.background)
 
@@ -87,7 +92,7 @@ const BookForm = () => {
             body: JSON.stringify(data)
         }
 
-        fetch("http://localhost:8000", requestOptions)
+        fetch(environment.api, requestOptions)
             .then((response) => response.json())
             .then((json) => console.log(json.results))
             .catch((error) => {
